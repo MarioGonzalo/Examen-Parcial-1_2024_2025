@@ -128,17 +128,48 @@ Tras salir del templo, el diario del aventurero te conduce a los restos de dos c
 
 En términos actuales, cada ciudad tiene su propia red local (subred) y disponía de un router en su gran torre de comunicaciones. Entre ambas torres existía un enlace directo (un cable histórico que unía las dos ciudades). También se encontraban switches en las plazas centrales de cada ciudad, conectando los ordenadores (PCs) de los habitantes. Para restaurar la conexión, tendrás que configurar apropiadamente los dispositivos de ambas urbes y el enlace entre ellas.
 
-![Image](https://github.com/user-attachments/assets/bcb429d4-788e-4951-b4e0-d9970e367d7a)
+![Image](https://github.com/user-attachments/assets/b9c75f8e-2bcf-479c-bc1a-9b8e87550a27)
 
-En este ejercicio hay 4 ordenadores conectados a dos switches que a su vez están conectados a dos routers
+En este ejercicio hay 4 ordenadores conectados a dos switches Cisco 2960 que a su vez están conectados a dos routers Cisco 2901
+
+**Tabla de IPs**
+
+### Red 1: Subred 192.168.10.0/24
+
+| Dispositivo     | IP             | Descripción           |
+|-----------------|----------------|------------------------|
+| Ordenador 1     | 192.168.10.2   | PC conectado al switch |
+| Ordenador 2     | 192.168.10.3   | PC conectado al switch |
+| Switch          | 192.168.10.1   | Switch de red local    |
+
+---
+
+### Red 2: Subred 192.168.20.0/24
+
+| Dispositivo     | IP             | Descripción           |
+|-----------------|----------------|------------------------|
+| Ordenador 1     | 192.168.20.2   | PC conectado al switch |
+| Ordenador 2     | 192.168.20.3   | PC conectado al switch |
+| Switch          | 192.168.20.1   | Switch de red local    |
+
+Estos dos switches están conectados entre si por un cable cruzado permitiendo la comunicación entre routers
 
 ## Ejercicio 2: La Ciudad de las Redes Aisladas
 Tras conectar las dos ciudades, te internas en las ruinas de la gran metrópolis central. Descubres que esta ciudad antigua estaba dividida en facciones o gremios, cada uno operando en su propio “canal sagrado” de comunicaciones para evitar interferencias con los otros. A pesar de compartir la misma infraestructura física (todas las guildas estaban en la misma ciudad y conectadas por los mismos caminos), utilizaron alguna forma de segmentación para que sus mensajes viajaran aislados, como si existieran redes paralelas invisibles dentro de la misma urbe. Solo en la Gran Torre Central (el edificio del consejo, equivalente a un router moderno) se unían estas comunicaciones, permitiendo el intercambio de mensajes entre gremios cuando era necesario, bajo supervisión.
 
 En tecnología de redes actual, lo que has descubierto es una ciudad implementada con VLANs (Redes Locales Virtuales) para separar el tráfico de cada gremio, y un enrutamiento router-on-a-stick (router con subinterfaces) en la torre central para interconectarlas de forma controlada. ¡Tu tarea es revivir esta arquitectura de red segmentada!
 
-![Image](https://github.com/user-attachments/assets/b9c75f8e-2bcf-479c-bc1a-9b8e87550a27)
+![Image](https://github.com/user-attachments/assets/bcb429d4-788e-4951-b4e0-d9970e367d7a)
 
 En este ejercicio habrá 4 dispositivos, dos para cada gremio, un switch Cisco 2960 para poder soportar las VLANs necesarias y trunking y un router Cisco 2811
 
 Los cuatro pcs estarán unidos al switch central, estos tendrán una dirección ip de 192.168.[numero de VLAN].[2-3] dependiendo de la VLAN que estén (10 o 20) tendrán una dirección de IP diferente y terminarán en 2 o 3 para diferenciarlos. El switch tiene 4 ordenadores conectados, dos de la VLAN de arquitectos, la 10 y dos de la VLAN de escribas, la 20, todos estos puertos serán de access y tendrán la VLAN específica para cada ordenador que está conectado, el único puerto que no es de access es en el que se conecta al router central, que es de trunk, esta conexión está formada por un cable cruzado con este router, el router se encargará de distribuir los paquetes entre las capas, si no las capas estarán aisladas entre ellas y no podrán pasar mensajes de una VLAN a otra. 
+
+**Tabla de IPs**
+
+### Vlan 10
+
+| Dispositivo     | IP             | Descripción           |
+|-----------------|----------------|------------------------|
+| Ordenador 1     | 192.168.10.2   | PC conectado al switch |
+| Ordenador 2     | 192.168.10.3   | PC conectado al switch |
