@@ -1,3 +1,5 @@
+Enlace readme: https://github.com/MarioGonzalo/Examen-Parcial-1_2024_2025.git
+
 # Examen-Parcial-1_2024_2025
 
 # Parte I: Conceptos y Teoría
